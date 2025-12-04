@@ -197,10 +197,6 @@ bookmark-analytics-toolkit/
 ├── app.py                          # Streamlitアプリケーション（エントリーポイント）
 ├── data/                           # サンプルデータ
 │   └── sample.json
-├── tests/                          # テストファイル
-│   ├── __init__.py
-│   ├── test_analysis.py
-│   └── test_loader.py
 └── src/
     └── bookmark_analytics_toolkit/
         ├── __init__.py             # パッケージ情報（バージョン: 0.2.0）
