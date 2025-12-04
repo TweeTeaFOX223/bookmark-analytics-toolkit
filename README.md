@@ -248,16 +248,24 @@ bookmark-analytics-toolkit/
 ## ★雑記
 
 ### srcフォルダの中身
-CLASS.mdにClaude Codeに分析させて書かせた説明を置いてあります。
+CLASS.mdにClaude Codeに分析させて書かせた説明を置いてあります。同じような文章データを解析してみたいって人はsrcの中身をぜひ流用してください。
 
-同じような文章データを解析してみたいって人はsrcの中身をぜひ流用してください。
+
+**srcフォルダのリンク**  
+https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/tree/main/src/bookmark_analytics_toolkit  
+**srcフォルダの中身の分析解説ページ(Claudeによるもの)**
+https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/CLASS.md  
 
 ### streamlitのUI作成(地獄)
 今回はほぼClaude Code中心のVibe Codingで作ったのですが、それでも`app.py`のUI調節が地獄でした。Reactと比較してレンダリング周りが非常に難しかった。
 
 「年フィルタの全期間のチェックを外す →年指定フィルタの一覧を表示＋データ内の最新年(2025年)にチェックを入れる →グラフの再読み込み」という処理の実装をClaudeに50回近く指示したのですが、それが全く上手く行かない。
 
-結局は人力で`st.rerun()`の位置が原因と特定して、それの修正を指示するまで実装ができませんでした…。
+結局は人力で`st.rerun()`の位置が原因と特定して、それの修正を指示するまで実装ができませんでした…。  
+
+**`app.py`(StreamlitのGUI構成のファイル)**
+https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/app.py  
+
 
 ## ライセンス
 
