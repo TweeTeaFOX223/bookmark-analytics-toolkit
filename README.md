@@ -96,10 +96,29 @@ https://forest.watch.impress.co.jp/docs/news/1203753.html
 WebBrowserBookmarksを起動すると、自動的にPC内のブラウザのブックマークのデータがあるフォルダが読み込まれます。
 
 Ctrl+Aでブックマークを全選択して左上の保存ボタンを押すことで、ブラウザブックマークをCSV/JSONに変換してエクスポートすることができます。
+![b1](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/Export1.png)  
+![b2](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/Export2.png)  
 
-CSV/JSONには、隠し項目含むブックマークの全データ(タイトル・URL・フォルダ名・フォルダパス・位置・作成日時・変更日時・固有ID等)が含まれるようになっています。
 
-通常ではブラウザから見ることが出来ないデータです。
+CSV/JSONには、隠し項目含むブックマークの全データ(タイトル・URL・フォルダ名・フォルダパス・位置・作成日時・変更日時・固有ID等)が含まれるようになっています。通常ではブラウザから見ることが出来ないデータです。下記はJSONの中身です。CSVも同じ感じです。
+```json
+[
+  {
+    "Title": "文字列 - ブックマークのタイトル",
+    "URL": "文字列 - ブックマークのURL",
+    "Folder Name": "文字列 - 所属フォルダ名",
+    "Folder Path": "文字列 - フォルダの階層パス(\\区切り)",
+    "Position": "文字列(数値) - ブックマークの位置",
+    "Created Time": "文字列 - 作成日時(YYYY/MM/DD HH:MM:SS形式)",
+    "Modified Time": "文字列 - 更新日時(空文字列の場合あり)",
+    "ID": "文字列(数値) - 一意のID",
+    "Guid": "文字列 - グローバル一意識別子",
+    "Web Browser": "文字列 - ブラウザ名(Chrome/Firefox等)",
+    "Bookmarks File": "文字列 - ブックマークファイルのパス"
+  }
+]
+```
+
 
 ### ３：Pythonとuvのインストール
 このアプリはパッケージとPython仮想環境の管理に **uv** を使用しています。uvをインストールしないと起動することができません。
