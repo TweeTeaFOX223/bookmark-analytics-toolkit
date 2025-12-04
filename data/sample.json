@@ -1,0 +1,54 @@
+[
+  {
+    "Title": ".NET 6.0 (Linux、macOS、Windows) をダウンロードする",
+    "URL": "https://dotnet.microsoft.com/ja-jp/download/dotnet/6.0",
+    "Folder Name": "C#",
+    "Folder Path": "ブックマーク バー\\プログラム\\プログラミング言語\\C#",
+    "Position": "2911",
+    "Created Time": "2022/07/04 4:57:37",
+    "Modified Time": "",
+    "ID": "9638",
+    "Guid": "af3e477e-5812-4769-83c5-8c03b677b2e7",
+    "Web Browser": "Chrome",
+    "Bookmarks File": "C:\\Users\\PC_User\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Bookmarks"
+  },
+  {
+    "Title": "Python Documentation",
+    "URL": "https://docs.python.org/3/",
+    "Folder Name": "Python",
+    "Folder Path": "ブックマーク バー\\プログラム\\プログラミング言語\\Python",
+    "Position": "1523",
+    "Created Time": "2023/03/15 10:22:15",
+    "Modified Time": "2024/01/10 14:30:00",
+    "ID": "7234",
+    "Guid": "python-docs-guid",
+    "Web Browser": "Firefox",
+    "Bookmarks File": "C:\\Users\\PC_User\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\default\\bookmarks"
+  },
+  {
+    "Title": "GitHub",
+    "URL": "https://github.com",
+    "Folder Name": "開発ツール",
+    "Folder Path": "ブックマーク バー\\プログラム\\開発ツール",
+    "Position": "100",
+    "Created Time": "2020/05/20 9:15:42",
+    "Modified Time": "",
+    "ID": "2341",
+    "Guid": "github-guid",
+    "Web Browser": "Chrome",
+    "Bookmarks File": "C:\\Users\\PC_User\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Bookmarks"
+  },
+  {
+    "Title": "Stack Overflow",
+    "URL": "https://stackoverflow.com",
+    "Folder Name": "開発ツール",
+    "Folder Path": "ブックマーク バー\\プログラム\\開発ツール",
+    "Position": "101",
+    "Created Time": "2020/06/12 15:45:30",
+    "Modified Time": "2023/11/05 8:20:15",
+    "ID": "2342",
+    "Guid": "stackoverflow-guid",
+    "Web Browser": "Chrome",
+    "Bookmarks File": "C:\\Users\\PC_User\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Bookmarks"
+  }
+]
