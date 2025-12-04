@@ -15,42 +15,66 @@
 1. **Browser Distribution** - ブラウザ種別のブックマーク分布（棒グラフ、パーセンテージ付き）
 ![a1](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/1_BrowserDistribution.png)
 
+<hr/>  
+  
 2. **Folder Distribution** - フォルダ別のブックマーク分布（上位n件、件数表示）  
 ![a2](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/2_FolderDistribution.png)
-   
+
+<hr/>  
+  
 3. **Domain Distribution** - ドメイン別のブックマーク分布（上位n件、件数・パーセンテージ表示）  
 ![a3](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/3_DomainDistribution.png)
-   
+
+<hr/>  
+  
 4. **Monthly Trend** - 月次のブックマーク作成推移（折れ線グラフ、年フィルタ付き）  
 ![a4](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/4_MonthlyTrend.png)  
-   
+
+<hr/>  
+  
 5. **Yearly Trend** - 年次のブックマーク作成推移（折れ線グラフ）
 ![a5](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/5_YearlyTrend.png)
-   
+
+<hr/>  
+  
 6. **Weekday Pattern** - 曜日別のブックマーク作成パターン  
 ![a6](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/6_WeekdayPattern.png)  
-   
+
+<hr/>  
+  
 7. **Hour Pattern** - 時間別のブックマーク作成パターン  
 ![a7](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/7_HourPattern.png)
 
+<hr/>  
+  
 8. **Weekday-Hour Heatmap** - 曜日と時間のヒートマップ  
 ![a8](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/8_Weekday-HourHeatmap.png)  
-   
+
+<hr/>  
+  
 9.  **Hierarchy Treemap** - フォルダ階層のツリーマップ（階層構造/グループ別切り替え可能）  
 ![a9](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/9_HierarchyTreemap.png)  
-    
+
+<hr/>  
+  
 10. **Folder Tree** - フォルダ階層のテキストツリー表示  
 ![a10](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/10_FolderTree.png)  
-    
+
+<hr/>  
+  
 11. **Word Cloud** - ブックマークタイトルの単語頻度をワードクラウドで可視化（日本語形態素解析対応）  
 ![a11](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/11_FolderTree.png)  
-    
+
+<hr/>  
+  
 12. **Word Ranking** - 単語出現回数ランキング（CSV/JSONダウンロード可能）  
 ![a12](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/12_WordRanking.png)  
 ### 便利なサイドバー設定
 - **グローバル年フィルタ**: サイドバーから特定の年を選択してすべてのグラフをフィルタリング
 - **形態素解析モード選択**: Sudachiの分割モード（短単位/中単位/長単位）を切り替え可能
 - **多言語対応**: 日本語/英語の切り替え（UIとグラフのすべての要素に対応）
+![b2](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/SideBar.png)  
+
 
 ### ブクマ内に変な文字があってもOK
 - 複数のエンコーディング対応（UTF-8, UTF-16, Shift-JIS, CP932など）
