@@ -9,31 +9,44 @@
 
 ## ★機能一覧
 
-### 12の方法でブックマークを分析
+### 12の方法でブックマークを分析  
+以下のような分析ができます。※知人のブクマで試したのでプライバシー保護のモザイクが付いています。
+
 1. **Browser Distribution** - ブラウザ種別のブックマーク分布（棒グラフ、パーセンテージ付き）
+![a1](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/1_BrowserDistribution.png)
+
+2. **Folder Distribution** - フォルダ別のブックマーク分布（上位n件、件数表示）  
+![a2](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/2_FolderDistribution.png)
    
-2. **Folder Distribution** - フォルダ別のブックマーク分布（上位n件、件数表示）
+3. **Domain Distribution** - ドメイン別のブックマーク分布（上位n件、件数・パーセンテージ表示）  
+![a3](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/3_DomainDistribution.png)
    
-3. **Domain Distribution** - ドメイン別のブックマーク分布（上位n件、件数・パーセンテージ表示）
-   
-4. **Monthly Trend** - 月次のブックマーク作成推移（折れ線グラフ、年フィルタ付き）
+4. **Monthly Trend** - 月次のブックマーク作成推移（折れ線グラフ、年フィルタ付き）  
+![a4](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/4_MonthlyTrend.png)  
    
 5. **Yearly Trend** - 年次のブックマーク作成推移（折れ線グラフ）
+![a5](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/5_YearlyTrend.png)
    
-6. **Weekday Pattern** - 曜日別のブックマーク作成パターン
+6. **Weekday Pattern** - 曜日別のブックマーク作成パターン  
+![a6](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/6_WeekdayPattern.png)  
    
-7. **Hour Pattern** - 時間別のブックマーク作成パターン
-   
-8. **Weekday-Hour Heatmap** - 曜日と時間のヒートマップ
-   
-9.  **Hierarchy Treemap** - フォルダ階層のツリーマップ（階層構造/グループ別切り替え可能）
-    
-10. **Folder Tree** - フォルダ階層のテキストツリー表示
-    
-11. **Word Cloud** - ブックマークタイトルの単語頻度をワードクラウドで可視化（日本語形態素解析対応）
-    
-12. **Word Ranking** - 単語出現回数ランキング（CSV/JSONダウンロード可能）
+7. **Hour Pattern** - 時間別のブックマーク作成パターン  
+![a7](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/7_HourPattern.png)
 
+8. **Weekday-Hour Heatmap** - 曜日と時間のヒートマップ  
+![a8](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/8_Weekday-HourHeatmap.png)  
+   
+9.  **Hierarchy Treemap** - フォルダ階層のツリーマップ（階層構造/グループ別切り替え可能）  
+![a9](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/9_HierarchyTreemap.png)  
+    
+10. **Folder Tree** - フォルダ階層のテキストツリー表示  
+![a10](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/10_FolderTree.png)  
+    
+11. **Word Cloud** - ブックマークタイトルの単語頻度をワードクラウドで可視化（日本語形態素解析対応）  
+![a11](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/11_FolderTree.png)  
+    
+12. **Word Ranking** - 単語出現回数ランキング（CSV/JSONダウンロード可能）  
+![a12](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/12_WordRanking.png)  
 ### 便利なサイドバー設定
 - **グローバル年フィルタ**: サイドバーから特定の年を選択してすべてのグラフをフィルタリング
 - **形態素解析モード選択**: Sudachiの分割モード（短単位/中単位/長単位）を切り替え可能
@@ -201,7 +214,7 @@ CLASS.mdにClaude Codeに分析させて書かせた説明を置いてありま�
 
 「年フィルタの全期間のチェックを外す →年指定フィルタの一覧を表示＋データ内の最新年(2025年)にチェックを入れる →グラフの再読み込み」という処理の実装をClaudeに50回近く指示したのですが、それが全く上手く行かない。
 
-結局は人力で`st.rerun()`の位置が原因と特定して、それの修正を指示するまでバグうまく作れませんでした…。
+結局は人力で`st.rerun()`の位置が原因と特定して、それの修正を指示するまで実装ができませんでした…。
 
 ## ライセンス
 
