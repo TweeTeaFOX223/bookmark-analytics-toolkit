@@ -239,17 +239,18 @@ bookmark-analytics-toolkit/
 | 日本語フォント対応             | matplotlib-fontja 1.1.0+            |
 | 日本語形態素解析               | SudachiPy 0.6.0+ (辞書: full版)     |
 | ワードクラウド生成             | WordCloud 1.9.0+                    |
-
-
-## ★雑記
+  
+  
+## ★雑記  
 
 ### srcフォルダの中身
-CLASS.mdにClaude Codeに分析させて書かせた説明を置いてあります。同じような形式で特定の文章データを解析してグラフやマップを出したいって人はsrcの中身をぜひ流用してみてください。
+CLASS.mdにClaude Codeに分析させて書かせた説明を置いてあります。同じような形式で特定の文章データを解析してグラフやマップを出したいって人はsrcの中身をぜひ流用してみてください。  
 
 
 **srcフォルダのリンク**  
-https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/tree/main/src/  bookmark_analytics_toolkit  
-**srcフォルダの中身の分析解説ページ(Claudeによるもの)**
+https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/tree/main/src/  
+
+**srcフォルダの中身の分析解説ページ(Claudeによるもの)**  
 https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/CLASS.md  
 
 ### streamlitのUI作成(地獄)
@@ -262,7 +263,7 @@ https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/CLASS.md
 結局は人力でソースコードとStreamlitのドキュメントを読み、`st.rerun()`の位置が原因と特定、それの修正を直接指示するまで上手く実装できませんでした…。  
 
 **`app.py`(StreamlitのGUI構成のファイル)**  
-- 「年選択チェックボックスの表示」と「既に同じファイルが読み込まれている場合はスキップ」のコメ付いてる部分が重要。
+- 「年選択チェックボックスの表示」と「既に同じファイルが読み込まれている場合はスキップ」のコメ付いてる部分が重要。  
 https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/app.py  
 
 
