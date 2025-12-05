@@ -96,6 +96,7 @@
   - [★技術スタック](#技術スタック)
   - [★雑記](#雑記)
     - [srcフォルダの中身](#srcフォルダの中身)
+    - [ブクマの文字情報のデコードについて](#ブクマの文字情報のデコードについて)
     - [streamlitのUI作成(地獄)](#streamlitのui作成地獄)
   - [ライセンス](#ライセンス)
 
@@ -211,8 +212,7 @@ bookmark-analytics-toolkit/
         │   ├── statistics.py       # 統計分析（分布、基本統計）
         │   ├── timeseries.py       # 時系列分析（月次/年次/曜日/時間パターン）
         │   ├── hierarchy.py        # 階層構造分析（ツリーマップ、フォルダ統計）
-        │   ├── text_analysis.py    # テキスト分析（SudachiPy形態素解析）
-        │   └── text_analysis_sp.py # テキスト分析（SentencePiece版）
+        │   └── text_analysis.py    # テキスト分析（SudachiPy形態素解析）
         └── visualization/          # グラフ描画モジュール
             ├── __init__.py
             ├── plotly_charts.py    # Plotlyインタラクティブチャート
@@ -253,8 +253,15 @@ https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/tree/main/src/
 
 **srcフォルダの中身の分析解説ページ(Claudeによるもの)**  
 https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/CLASS.md  
-
-### streamlitのUI作成(地獄)
+  
+### ブクマの文字情報のデコードについて  
+  
+ブクマのタイトルには変な文字列のデータが混入している可能性が高いです。ファイル読込時のデコードは色々な文字コードでやらないと上手く行かないと思います。  
+  
+`src/bookmark_analytics_toolkit/data/loader.py`にファイル読み込み時のデコード処理が書いてあるので、同じようにブクマのデータを扱うなら参考になるかもです。  
+https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/src/bookmark_analytics_toolkit/data/loader.py  
+  
+### streamlitのUI作成(地獄)  
 今回はほぼClaude Code中心のVibe Codingで作ったのですが…、`app.py`のUI調節が地獄でした。Reactと比較してレンダリング順序と状態管理が非常に難しかった。
 
 「年フィルタの全期間のチェックを外す →データ内に含まれる各年の一覧チェックボックスを表示＋データ内の最新年(2025年)にチェックを入れる →グラフの再読み込み」という処理を実装したくてClaudeに指示をしたのですが、この部分が中々に上手く行かない。
