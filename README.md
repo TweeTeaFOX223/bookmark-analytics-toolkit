@@ -107,9 +107,10 @@
 
 このアプリはNirSoftのフリーソフト「WebBrowserBookmarks」を使用して、PC内にインストールされている各ブラウザからエクスポートした、ブックマークのファイル(CSV/JSON)を分析するというものです。
 
-最初にNirSoftの公式サイトからWebBrowserBookmarksをDLしてください。
-**https://www.nirsoft.net/utils/web_browser_bookmarks_view.html**
-
+最初にNirSoftの公式サイトからWebBrowserBookmarksをDLしてください。  
+**https://www.nirsoft.net/utils/web_browser_bookmarks_view.html**  
+  
+  
 ※NirSoftはフリーソフト開発で有名な歴史ある団体です。安全性は大丈夫と思います。
 
 老舗のフリーソフト公開サイト“nirsoft.net”が15周年 ～テスト版ツールの公開ページがお披露目  
