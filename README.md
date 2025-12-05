@@ -62,12 +62,12 @@
 
 <hr/>  
   
-11. **Word Cloud** - ブックマークタイトルの単語頻度をワードクラウドで可視化（日本語形態素解析対応）  
+11. **Word Cloud** - ブックマークタイトルの単語頻度をワードクラウドで可視化（日本語形態素解析対応） ※ここはモザイク難しかったのでダミー画像です。実物もこのように出ます。  
 ![a11](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/11_FolderTree.png)  
 
 <hr/>  
   
-12. **Word Ranking** - 単語出現回数ランキング（CSV/JSONダウンロード可能）  
+1.  **Word Ranking** - 単語出現回数ランキング（CSV/JSONダウンロード可能）  
 ![a12](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/12_WordRanking.png)  
 ### 便利なサイドバー設定
 - **グローバル年フィルタ**: サイドバーから特定の年を選択してすべてのグラフをフィルタリング
@@ -244,22 +244,25 @@ bookmark-analytics-toolkit/
 ## ★雑記
 
 ### srcフォルダの中身
-CLASS.mdにClaude Codeに分析させて書かせた説明を置いてあります。同じような文章データを解析してみたいって人はsrcの中身をぜひ流用してください。
+CLASS.mdにClaude Codeに分析させて書かせた説明を置いてあります。同じような形式で特定の文章データを解析してグラフやマップを出したいって人はsrcの中身をぜひ流用してみてください。
 
 
 **srcフォルダのリンク**  
-https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/tree/main/src/bookmark_analytics_toolkit  
+https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/tree/main/src/  bookmark_analytics_toolkit  
 **srcフォルダの中身の分析解説ページ(Claudeによるもの)**
 https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/CLASS.md  
 
 ### streamlitのUI作成(地獄)
-今回はほぼClaude Code中心のVibe Codingで作ったのですが、それでも`app.py`のUI調節が地獄でした。Reactと比較してレンダリング周りが非常に難しかった。
+今回はほぼClaude Code中心のVibe Codingで作ったのですが…、`app.py`のUI調節が地獄でした。Reactと比較してレンダリング順序と状態管理が非常に難しかった。
 
-「年フィルタの全期間のチェックを外す →年指定フィルタの一覧を表示＋データ内の最新年(2025年)にチェックを入れる →グラフの再読み込み」という処理の実装をClaudeに50回近く指示したのですが、それが全く上手く行かない。
+「年フィルタの全期間のチェックを外す →データ内に含まれる各年の一覧チェックボックスを表示＋データ内の最新年(2025年)にチェックを入れる →グラフの再読み込み」という処理を実装したくてClaudeに指示をしたのですが、この部分が中々に上手く行かない。
 
-結局は人力で`st.rerun()`の位置が原因と特定して、それの修正を指示するまで実装ができませんでした…。  
+「全期間のチェックを外すと無限ループでフリーズ」「全期間のチェックを外しても各年の一覧チェックボックスが表示されない」等の不具合が修正指示を出しても毎回発生してしまう感じになってしまいました。
 
-**`app.py`(StreamlitのGUI構成のファイル)**
+結局は人力でソースコードとStreamlitのドキュメントを読み、`st.rerun()`の位置が原因と特定、それの修正を直接指示するまで上手く実装できませんでした…。  
+
+**`app.py`(StreamlitのGUI構成のファイル)**  
+- 「年選択チェックボックスの表示」と「既に同じファイルが読み込まれている場合はスキップ」のコメ付いてる部分が重要。
 https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/app.py  
 
 
