@@ -87,14 +87,19 @@
     - [ブクマ内に変な文字があってもOK](#ブクマ内に変な文字があってもok)
   - [★目次](#目次)
   - [★アプリの使用方法](#アプリの使用方法)
-    - [１：WebBrowserBookmarksをインストール](#１webbrowserbookmarksをインストール)
-    - [２：ブックマークデータをCSV/JSONに出力](#２ブックマークデータをcsvjsonに出力)
-    - [３：Pythonとuvのインストール](#３pythonとuvのインストール)
-    - [４：パッケージDLとアプリ起動](#４パッケージdlとアプリ起動)
-    - [５：基本的な操作フロー](#５基本的な操作フロー)
-  - [★Windows用exeファイルのビルド(非推奨)](#windows用exeファイルのビルド非推奨)
+    - [事前準備：ブクマのデータを準備](#事前準備ブクマのデータを準備)
+      - [１：WebBrowserBookmarksをインストール](#１webbrowserbookmarksをインストール)
+      - [２：ブックマークデータをCSV/JSONに出力](#２ブックマークデータをcsvjsonに出力)
+    - [方法A：Windows用のexeをDLして使用！](#方法awindows用のexeをdlして使用)
+      - [ファイルをDL＆解凍→実行するだけ](#ファイルをdl解凍実行するだけ)
+    - [方法B：uvを使用してインストール＆使用！](#方法buvを使用してインストール使用)
+      - [１：Pythonとuvのインストール](#１pythonとuvのインストール)
+      - [２：パッケージDLとアプリ起動](#２パッケージdlとアプリ起動)
+      - [３：基本的な操作フロー](#３基本的な操作フロー)
+  - [★Windows用exeファイルのビルド(高難易度)](#windows用exeファイルのビルド高難易度)
     - [スクリプトによるビルド](#スクリプトによるビルド)
-    - [exeファイルの配布と使用方法](#exeファイルの配布と使用方法)
+    - [exeファイルの配布](#exeファイルの配布)
+    - [GitHub ActionsによるRelease](#github-actionsによるrelease)
   - [★技術スタック](#技術スタック)
   - [★雑記](#雑記)
     - [srcフォルダの中身](#srcフォルダの中身)
@@ -106,8 +111,8 @@
 
 ## ★アプリの使用方法
 
-
-### １：WebBrowserBookmarksをインストール
+### 事前準備：ブクマのデータを準備
+#### １：WebBrowserBookmarksをインストール
 
 このアプリはNirSoftのフリーソフト「WebBrowserBookmarks」を使用して、PC内にインストールされている各ブラウザからエクスポートした、ブックマークのファイル(CSV/JSON)を分析するというものです。
 
@@ -118,9 +123,12 @@
 ※NirSoftはフリーソフト開発で有名な歴史ある団体です。安全性は大丈夫と思います。
 
 老舗のフリーソフト公開サイト“nirsoft.net”が15周年 ～テスト版ツールの公開ページがお披露目  
-https://forest.watch.impress.co.jp/docs/news/1203753.html
+https://forest.watch.impress.co.jp/docs/news/1203753.html  
+  
+<br>
+  
 
-### ２：ブックマークデータをCSV/JSONに出力
+#### ２：ブックマークデータをCSV/JSONに出力
 
 WebBrowserBookmarksを起動すると、自動的にPC内のブラウザのブックマークのデータがあるフォルダが読み込まれます。
 
@@ -147,10 +155,43 @@ CSV/JSONには、隠し項目含むブックマークの全データ(タイト�
   }
 ]
 ```
+  
+<br>
+  
+### 方法A：Windows用のexeをDLして使用！
 
+#### ファイルをDL＆解凍→実行するだけ
+GitHub Releaseに置いてるある実行ファイルをDLすると使えます。uvを使用する方法がよくわからない人向けです。  
+**https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/release**  
+  
+`BookmarkAnalyticsToolkit_Windows_v0.1.0_{日付}.zip`ってファイルがそれです。  
+![DL](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/DL.png)  
+  
+<br>
+  
+**使用方法:**
+1. `BookmarkAnalyticsToolkit_Windows_v0.1.0_{日付}.zip`を解凍
+2. 中にある`BookmarkAnalyticsToolkit.exe` をダブルクリックして起動
+3. コンソールウィンドウが開き、起動処理が開始されます
+4. ブラウザが自動的に開き、アプリケーションが表示されます
+5. 終了する場合は、コンソールウィンドウ＆ブラウザのタブを閉じます
 
-### ３：Pythonとuvのインストール
-このアプリはパッケージとPython仮想環境の管理に **uv** を使用しています。uvをインストールしないと起動することができません。
+**備考**
+- exeファイルにアンチウイルスソフトが警告を出す可能性大です
+  - PyInstallerでビルドされたアプリは基本引っ掛かります
+- exeファイルのサイズは約800MB程度になります
+  - 約300MBがSudachiPyの辞書データ
+  - 残りがPython実行環境とライブラリになります
+  
+<br>
+  
+<hr/>  
+  
+### 方法B：uvを使用してインストール＆使用！
+#### １：Pythonとuvのインストール  
+コマンドライン上からコマンドで確実に起動したい＆ZipをDLするよりも早く起動したい人向けです。  
+  
+まず、このアプリはパッケージとPython仮想環境の管理に **uv** を使用しています。Pythonを入れていても、uvをインストールしないと起動することができません。
 
 まだuvをインストールしていない場合：
 
@@ -164,8 +205,8 @@ powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-### ４：パッケージDLとアプリ起動
-
+#### ２：パッケージDLとアプリ起動
+  
 ```bash
 # リポジトリをクローン
 git clone https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit.git
@@ -179,24 +220,27 @@ uv run streamlit run app.py
 ```
 
 アプリケーションが起動すると、ブラウザで `http://localhost:8501` が自動的に開きます。
-
-
-### ５：基本的な操作フロー
+  
+  
+#### ３：基本的な操作フロー
 起動に成功したならば、後は画面通りにやれば使用できると思います。
-
+  
 
 1. アプリケーションを起動: `uv run streamlit run app.py`
 2. サイドバーの「ファイルアップロード」からJSONまたはCSVファイルを選択
 3. データが読み込まれると、各タブでリアルタイムに分析結果が表示されます
 4. 各タブの設定パネルで表示内容をカスタマイズできます
 5. 実際に触って色々と遊んでみてください。
+  
+<br>
+  
+## ★Windows用exeファイルのビルド(高難易度)
 
-## ★Windows用exeファイルのビルド(非推奨)
+一応、PyInstallerを使用してWindows用の実行ファイル(.exe)にビルドできるようにしてあるのですが、高難易度です。
 
-一応、PyInstallerを使用してWindows用の実行ファイル(.exe)にビルドできるようにしてあるのですが、非推奨です。
-
+- 今はビルドできる状態ですが、かなりギリギリで動いてる感じです。  
 - uvを使った方が圧倒的に早く簡単に起動できます。`uv sync`とZipのDLでは、前者の方が多分早いです。
-- exeのビルド設定が結構難しいです。コードを変更する度に問題発生する可能性が高いです。
+- exeのビルド設定が結構難しいです。コードを変更する度に問題発生する可能性が高いです。  
 
 ### スクリプトによるビルド
   
@@ -209,26 +253,20 @@ uv run python build_exe.py
 - `dist/BookmarkAnalyticsToolkit/` - 実行ファイルとライブラリ  
 - `release/BookmarkAnalyticsToolkit_Windows_v0.1.0_YYYYMMDD.zip` - **配布用zipファイル**（自動生成）  
   
-### exeファイルの配布と使用方法
+### exeファイルの配布
 
 **配布方法:**
-- ビルド完了後、`release/` フォルダ内のzipファイルを配布
-- そのまま配布可能です（README.txtも同梱されています）
-
-**使用方法:**
-1. 配布されたzipファイルを解凍
-2. `BookmarkAnalyticsToolkit.exe` をダブルクリックして起動
-3. コンソールウィンドウが開き、起動処理が開始されます
-4. ブラウザが自動的に開き、アプリケーションが表示されます
-5. 終了する場合は、コンソールウィンドウ＆ブラウザのタブを閉じます
-
-**備考**
-- exeファイルにアンチウイルスソフトが警告を出す可能性大です
-  - PyInstallerでビルドされたアプリは基本引っ掛かります
-- exeファイルのサイズは約800MB程度になります
-  - 約300MBがSudachiPyの辞書データ
-  - 残りがPython実行環境とライブラリになります
-
+- ビルド完了後、`release/` フォルダ内のzipファイルを配布  
+- そのまま配布可能です（README.txtも同梱されています）  
+  
+### GitHub ActionsによるRelease
+このアプリは「タグのプッシュ」が行われた場合に、GitHub Actionsでビルド＆ReleaseにZipを上げるように設定されています。  
+  
+詳細は下記ファイル(`.github/workflows/main.yml`)を見てください。  
+https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/.github/workflows/main.yml
+  
+<br>
+  
 ## ★技術スタック
 
 「uvとStreamlitとPolarsとSudachiPyの使用」「12個の分析方法」を指定の上、後はClaudeに選定させました。
@@ -267,12 +305,16 @@ https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/tree/main/src/
 **srcフォルダの中身の分析解説ページ(Claudeによるもの)**  
 https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/CLASS.md  
   
+<br>
+  
 ### ブクマの文字情報のデコードについて  
   
 ブクマのタイトルには変な文字列のデータが混入している可能性が高いです。ファイル読込時のデコードは色々な文字コードでやらないと上手く行かないと思います。  
   
 `src/bookmark_analytics_toolkit/data/loader.py`にファイル読み込み時のデコード処理が書いてあるので、同じようにブクマのデータを扱うなら参考になるかもです。  
 https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/src/bookmark_analytics_toolkit/data/loader.py  
+  
+<br>
   
 ### streamlitのUI作成(地獄)  
 今回はほぼClaude Code中心のVibe Codingで作ったのですが…、`app.py`のUI調節が地獄でした。Reactと比較してレンダリング順序と状態管理が非常に難しかった。
@@ -287,9 +329,8 @@ https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/src/bookma
 - 「年選択チェックボックスの表示」と「既に同じファイルが読み込まれている場合はスキップ」のコメ付いてる部分が重要。  
 https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/app.py  
   
-
-
-
+<br>
+  
 ## ★プロジェクト構造
 
 ```
@@ -323,7 +364,9 @@ bookmark-analytics-toolkit/
             ├── seaborn_charts.py   # Seaborn統計チャート
             └── wordcloud_viz.py    # ワードクラウド生成
 ```
-
+  
+<br>
+  
 ## ライセンス
 
 MIT Licenseです。
