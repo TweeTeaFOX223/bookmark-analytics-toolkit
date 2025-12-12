@@ -1,0 +1,130 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest]
+        python-version: ['3.12']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          uv sync
+          uv add --dev pyinstaller
+
+      - name: Build application with PyInstaller
+        run: uv run python build_exe.py
+
+      - name: Get artifact name
+        id: artifact-name
+        shell: bash
+        run: |
+          # release/ディレクトリ内のzipファイル名を取得
+          cd release
+          ZIP_FILE=$(ls BookmarkAnalyticsToolkit_Windows_*.zip | head -n 1)
+          echo "name=$ZIP_FILE" >> $GITHUB_OUTPUT
+          echo "path=release/$ZIP_FILE" >> $GITHUB_OUTPUT
+
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: '${{ steps.artifact-name.outputs.path }}'
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: BookmarkAnalyticsToolkit-Windows
+          path: ${{ steps.artifact-name.outputs.path }}
+          retention-days: 90
+
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2.5.0
+        with:
+          files: artifacts/**/*.zip
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          body: |
+            ## Bookmark Analytics Toolkit - Windows版
+
+            ### 📥 ダウンロード
+            このリリースには以下のファイルが含まれます:
+            - Windows 10/11 (64bit): `BookmarkAnalyticsToolkit_Windows_v*.zip`
+
+            ### 🚀 インストール方法
+            1. **ダウンロード**: 上記のzipファイルをダウンロードしてください
+            2. **解凍**: ダウンロードしたzipファイルを任意のフォルダに解凍してください
+            3. **起動**: `BookmarkAnalyticsToolkit.exe` をダブルクリックして起動
+            4. **ブラウザ**: 自動的にブラウザが開き、アプリケーションが表示されます
+
+            ### 📝 使用方法
+            1. サイドバーの「ファイルアップロード」からブックマークファイル（CSV/JSON）を選択
+            2. 各タブで様々な分析結果を確認できます
+            3. 終了する場合は、コンソールウィンドウを閉じてください
+
+            ### 📊 ブックマークデータの準備
+            1. NirSoftの「WebBrowserBookmarks」をダウンロード
+               https://www.nirsoft.net/utils/web_browser_bookmarks_view.html
+            2. WebBrowserBookmarksを起動（PCのブックマークが自動読込される）
+            3. Ctrl+Aで全選択 → 保存ボタンでCSV/JSON形式で保存
+            4. 保存したファイルを本アプリにアップロード
+
+            ### ⚠️ 重要な注意事項
+            - **初回起動**: 初回起動時は10〜30秒程度かかる場合があります
+            - **Windows Defender**: 警告が出る場合があります（PyInstallerの一般的な現象）
+              - 「詳細情報」→「実行」で起動できます
+              - 安全性が心配な場合は、GitHubからソースコードを確認できます
+            - **ファイルサイズ**: 約800MB（SudachiPy辞書データ約300MB含む）
+            - **ポート使用**: localhost:8501を使用します
+
+            ### ✅ 動作環境
+            - Windows 10 / 11 (64bit)
+            - メモリ: 4GB以上推奨
+            - ディスク空き容量: 1GB以上
+
+            ### 🔐 Verification
+            すべてのアーティファクトは GitHub Artifact Attestations で署名されています。
+            以下のコマンドで真正性を検証できます:
+            ```bash
+            gh attestation verify <file> --owner ${{ github.repository_owner }}
+            ```
+
+            ### 📋 変更点
+            以下の自動生成されたリリースノートをご覧ください。
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
