@@ -13,6 +13,13 @@ import subprocess
 import shutil
 from pathlib import Path
 
+# GitHub Actions等のCI環境でUTF-8出力を強制
+if sys.stdout.encoding != "utf-8":
+    import io
+
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8")
+
 
 def get_package_data_files():
     """必要なパッケージデータファイルのパスを収集"""
@@ -87,26 +94,40 @@ def create_spec_file():
 
 import sys
 from pathlib import Path
-from PyInstaller.utils.hooks import copy_metadata
+from PyInstaller.utils.hooks import copy_metadata, collect_all
 
 block_cipher = None
 
-# メタデータを収集（各パッケージのメタデータを連結）
-datas = {copy_metadata_calls}
+# メタデータとデータファイルを収集
+# collect_allを使ってstreamlit全体（メタデータ含む）を確実に含める
+datas, binaries, hiddenimports = collect_all('streamlit')
+
+# 他のパッケージのメタデータも追加
+try:
+    datas += copy_metadata('plotly')
+    datas += copy_metadata('altair')
+    datas += copy_metadata('pandas')
+    datas += copy_metadata('numpy')
+    datas += copy_metadata('polars')
+    datas += copy_metadata('sudachipy')
+    datas += copy_metadata('wordcloud')
+    datas += copy_metadata('matplotlib')
+    datas += copy_metadata('seaborn')
+except Exception as e:
+    print(f"Warning: Some metadata could not be collected: {{e}}")
 
 # 分析対象のメインスクリプト（ラッパーを使用）
 a = Analysis(
     [r'build_wrapper.py'],
     pathex=[r'{src_dir}'],
-    binaries=[],
+    binaries=binaries,
     datas=datas + [
         {datas_str},
         (r'data', r'data'),  # サンプルデータ
         (r'app.py', r'.'),  # メインアプリケーションファイル
         (r'src', r'src'),  # srcディレクトリ全体（src.パッケージのインポートに必要）
     ],
-    hiddenimports=[
-        'streamlit',
+    hiddenimports=hiddenimports + [
         'streamlit.runtime',
         'streamlit.runtime.scriptrunner',
         'streamlit.runtime.scriptrunner.script_runner',
@@ -126,6 +147,8 @@ a = Analysis(
         'bookmark_analytics_toolkit.analysis',
         'bookmark_analytics_toolkit.visualization',
         'bookmark_analytics_toolkit.i18n',
+        'importlib.metadata',
+        'importlib_metadata',
     ],
     hookspath=[],
     hooksconfig={{}},
