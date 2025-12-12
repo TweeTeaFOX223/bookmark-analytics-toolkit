@@ -48,3 +48,10 @@ data/*.json
 data/*.csv
 !data/sample*.json
 !data/sample*.csv
+
+# PyInstaller build artifacts
+*.spec
+build/
+dist/
+release/
+requirements.txt  # Auto-generated from pyproject.toml during build

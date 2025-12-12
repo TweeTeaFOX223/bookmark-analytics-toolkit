@@ -7,8 +7,9 @@
 
 from typing import Dict, List, Tuple
 import polars as pl
-from sudachipy import tokenizer
-from sudachipy import dictionary
+
+# SudachiPyの正しいインポート（v0.6+のトップレベルインポート）
+from sudachipy import Dictionary, Tokenizer
 
 
 class TextAnalyzer:
@@ -30,7 +31,7 @@ class TextAnalyzer:
                 - C: 長単位（最も長い分割）
         """
         # SudachiDict-fullを使用してトークナイザーを作成
-        self.tokenizer_obj = dictionary.Dictionary(dict="full").create()
+        self.tokenizer_obj = Dictionary(dict="full").create()
         # 分割モードを設定
         self.set_mode(mode)
 
@@ -42,11 +43,11 @@ class TextAnalyzer:
             mode: 分割モード ("A", "B", "C")
         """
         if mode == "A":
-            self.mode = tokenizer.Tokenizer.SplitMode.A
+            self.mode = Tokenizer.SplitMode.A
         elif mode == "B":
-            self.mode = tokenizer.Tokenizer.SplitMode.B
+            self.mode = Tokenizer.SplitMode.B
         else:  # "C" or default
-            self.mode = tokenizer.Tokenizer.SplitMode.C
+            self.mode = Tokenizer.SplitMode.C
 
     @staticmethod
     def _is_valid_word(word: str, pos: str) -> bool:
@@ -107,9 +108,7 @@ class TextAnalyzer:
 
         return words
 
-    def get_word_frequency(
-        self, df: pl.DataFrame, title_column: str = "Title"
-    ) -> Dict[str, int]:
+    def get_word_frequency(self, df: pl.DataFrame, title_column: str = "Title") -> Dict[str, int]:
         """
         DataFrameからブックマークタイトルを抽出し、単語の出現頻度を計算
 

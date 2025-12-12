@@ -2,7 +2,7 @@
 
 [NirSoftのWebBrowserBookmarks(フリーソフト)](https://www.nirsoft.net/utils/web_browser_bookmarks_view.html)を使って出力した、お手元のPCに入っているブラウザのブックマークデータ(CSV/JSON)を分析するための PythonのGUIアプリ(Streamlit)です。
 
-ブラウザのブックマーク機能を多用している方が本アプリを使用すると、自分のネット歴を詳細に振り返ることができます。
+ブラウザのブックマーク機能を多用している方が本アプリを使用すると、自分のネット歴を詳細に振り返ることができます。ブクマ数が100～1000件以上ぐらいの人が使うと面白い結果が出てくると思います。
 
 アプリをインストールした時の容量は約800MBです　→約300MBがSudachiPyの辞書、残りがPython本体とPythonパッケージになります。
 
@@ -67,7 +67,7 @@
 
 <hr/>  
   
-1.  **Word Ranking** - 単語出現回数ランキング（CSV/JSONダウンロード可能）  
+12.  **Word Ranking** - 単語出現回数ランキング（CSV/JSONダウンロード可能）  
 ![a12](https://raw.githubusercontent.com/TweeTeaFOX223/bookmark-analytics-toolkit/refs/heads/main/screenshots/12_WordRanking.png)  
 ### 便利なサイドバー設定
 - **グローバル年フィルタ**: サイドバーから特定の年を選択してすべてのグラフをフィルタリング
@@ -86,22 +86,25 @@
     - [便利なサイドバー設定](#便利なサイドバー設定)
     - [ブクマ内に変な文字があってもOK](#ブクマ内に変な文字があってもok)
   - [★目次](#目次)
-  - [★使用方法](#使用方法)
+  - [★アプリの使用方法](#アプリの使用方法)
     - [１：WebBrowserBookmarksをインストール](#１webbrowserbookmarksをインストール)
     - [２：ブックマークデータをCSV/JSONに出力](#２ブックマークデータをcsvjsonに出力)
     - [３：Pythonとuvのインストール](#３pythonとuvのインストール)
     - [４：パッケージDLとアプリ起動](#４パッケージdlとアプリ起動)
     - [５：基本的な操作フロー](#５基本的な操作フロー)
-  - [★プロジェクト構造](#プロジェクト構造)
+  - [★Windows用exeファイルのビルド(非推奨)](#windows用exeファイルのビルド非推奨)
+    - [スクリプトによるビルド](#スクリプトによるビルド)
+    - [exeファイルの配布と使用方法](#exeファイルの配布と使用方法)
   - [★技術スタック](#技術スタック)
   - [★雑記](#雑記)
     - [srcフォルダの中身](#srcフォルダの中身)
     - [ブクマの文字情報のデコードについて](#ブクマの文字情報のデコードについて)
     - [streamlitのUI作成(地獄)](#streamlitのui作成地獄)
+  - [★プロジェクト構造](#プロジェクト構造)
   - [ライセンス](#ライセンス)
 
 
-## ★使用方法
+## ★アプリの使用方法
 
 
 ### １：WebBrowserBookmarksをインストール
@@ -165,7 +168,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ```bash
 # リポジトリをクローン
-git clone <repository-url>
+git clone https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit.git
 cd bookmark-analytics-toolkit
 
 # 依存パッケージのインストール（uvが自動的に仮想環境を作成・管理）
@@ -188,44 +191,53 @@ uv run streamlit run app.py
 4. 各タブの設定パネルで表示内容をカスタマイズできます
 5. 実際に触って色々と遊んでみてください。
 
+## ★Windows用exeファイルのビルド(非推奨)
 
-## ★プロジェクト構造
+一応、PyInstallerを使用してWindows用の実行ファイル(.exe)にビルドできるようにしてあるのですが、非推奨です。
 
+- uvを使った方が圧倒的に早く簡単に起動できます。`uv sync`とZipのDLでは、前者の方が多分早いです。
+- exeのビルド設定が結構難しいです。コードを変更する度に問題発生する可能性が高いです。
+
+### スクリプトによるビルド
+  
+```bash  
+uv run python build_exe.py  
 ```
-bookmark-analytics-toolkit/
-├── pyproject.toml                  # プロジェクト設定ファイル（hatchling使用）
-├── LICENSE                         # ライセンスファイル
-├── README.md                       # プロジェクト説明
-├── app.py                          # Streamlitアプリケーション（エントリーポイント）
-├── data/                           # サンプルデータ
-│   └── sample.json
-└── src/
-    └── bookmark_analytics_toolkit/
-        ├── __init__.py             # パッケージ情報（バージョン: 0.2.0）
-        ├── i18n.py                 # 多言語対応モジュール（日本語・英語）
-        ├── data/                   # データローディングと前処理
-        │   ├── __init__.py
-        │   ├── loader.py           # JSON/CSVファイルの読み込み
-        │   └── preprocessor.py     # データ前処理と派生カラム生成
-        ├── analysis/               # データ分析モジュール
-        │   ├── __init__.py
-        │   ├── statistics.py       # 統計分析（分布、基本統計）
-        │   ├── timeseries.py       # 時系列分析（月次/年次/曜日/時間パターン）
-        │   ├── hierarchy.py        # 階層構造分析（ツリーマップ、フォルダ統計）
-        │   └── text_analysis.py    # テキスト分析（SudachiPy形態素解析）
-        └── visualization/          # グラフ描画モジュール
-            ├── __init__.py
-            ├── plotly_charts.py    # Plotlyインタラクティブチャート
-            ├── matplotlib_charts.py # Matplotlib静的チャート
-            ├── seaborn_charts.py   # Seaborn統計チャート
-            └── wordcloud_viz.py    # ワードクラウド生成
-```
+  
+このコマンドを実行すると3～5分でビルドが完了、以下のファイルが生成されます。distは中間作業で使用するファイル、releaseは配布可能なZipファイルになります。これらのファイルは使わなくなったら削除しても大丈夫です。  
+  
+- `dist/BookmarkAnalyticsToolkit/` - 実行ファイルとライブラリ  
+- `release/BookmarkAnalyticsToolkit_Windows_v0.1.0_YYYYMMDD.zip` - **配布用zipファイル**（自動生成）  
+  
+### exeファイルの配布と使用方法
+
+**配布方法:**
+- ビルド完了後、`release/` フォルダ内のzipファイルを配布
+- そのまま配布可能です（README.txtも同梱されています）
+
+**使用方法:**
+1. 配布されたzipファイルを解凍
+2. `BookmarkAnalyticsToolkit.exe` をダブルクリックして起動
+3. コンソールウィンドウが開き、起動処理が開始されます
+4. ブラウザが自動的に開き、アプリケーションが表示されます
+5. 終了する場合は、コンソールウィンドウ＆ブラウザのタブを閉じます
+
+**備考**
+- exeファイルにアンチウイルスソフトが警告を出す可能性大です
+  - PyInstallerでビルドされたアプリは基本引っ掛かります
+- exeファイルのサイズは約800MB程度になります
+  - 約300MBがSudachiPyの辞書データ
+  - 残りがPython実行環境とライブラリになります
 
 ## ★技術スタック
 
 「uvとStreamlitとPolarsとSudachiPyの使用」「12個の分析方法」を指定の上、後はClaudeに選定させました。
+- uv：Pythonを簡単に管理したいので採用
+- Streamlit：設定操作する度にグラフ描画＋設定が大量にあるアプリなので採用
+- Polars：データフレーム操作で軽い＋扱い簡単なので採用
+- SudachiPy：辞書データが300MB＋パッケージ管理可能で扱いやすいので採用
 
-ブクマのような文字中心データの分析や可視化となると、まあこの辺だろなという気がします。
+グラフ描画関係：ブクマのような文字中心データの分析や可視化となると、まあこの辺だろなと思います。
 
 | 技術項目                       | 使用しているもの                    |
 | ------------------------------ | ----------------------------------- |
@@ -240,6 +252,7 @@ bookmark-analytics-toolkit/
 | 日本語フォント対応             | matplotlib-fontja 1.1.0+            |
 | 日本語形態素解析               | SudachiPy 0.6.0+ (辞書: full版)     |
 | ワードクラウド生成             | WordCloud 1.9.0+                    |
+| exeファイルのビルド             | pyinstaller 6.17.0+                |
   
   
 ## ★雑記  
@@ -273,7 +286,43 @@ https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/src/bookma
 **`app.py`(StreamlitのGUI構成のファイル)**  
 - 「年選択チェックボックスの表示」と「既に同じファイルが読み込まれている場合はスキップ」のコメ付いてる部分が重要。  
 https://github.com/TweeTeaFOX223/bookmark-analytics-toolkit/blob/main/app.py  
+  
 
+
+
+## ★プロジェクト構造
+
+```
+bookmark-analytics-toolkit/
+├── pyproject.toml                  # プロジェクト設定ファイル（hatchling使用）
+├── LICENSE                         # ライセンスファイル
+├── README.md                       # プロジェクト説明
+├── app.py                          # Streamlitアプリケーション（エントリーポイント）
+├── build_exe.py                    # PyInstallerによるビルドスクリプト
+├── build_wrapper.py                # PyInstallerで固める際のエントリーポイント
+├── data/                           # サンプルデータ
+│   └── sample.json
+└── src/
+    └── bookmark_analytics_toolkit/
+        ├── __init__.py             # パッケージ情報（バージョン: 0.2.0）
+        ├── i18n.py                 # 多言語対応モジュール（日本語・英語）
+        ├── data/                   # データローディングと前処理
+        │   ├── __init__.py
+        │   ├── loader.py           # JSON/CSVファイルの読み込み
+        │   └── preprocessor.py     # データ前処理と派生カラム生成
+        ├── analysis/               # データ分析モジュール
+        │   ├── __init__.py
+        │   ├── statistics.py       # 統計分析（分布、基本統計）
+        │   ├── timeseries.py       # 時系列分析（月次/年次/曜日/時間パターン）
+        │   ├── hierarchy.py        # 階層構造分析（ツリーマップ、フォルダ統計）
+        │   └── text_analysis.py    # テキスト分析（SudachiPy形態素解析）
+        └── visualization/          # グラフ描画モジュール
+            ├── __init__.py
+            ├── plotly_charts.py    # Plotlyインタラクティブチャート
+            ├── matplotlib_charts.py # Matplotlib静的チャート
+            ├── seaborn_charts.py   # Seaborn統計チャート
+            └── wordcloud_viz.py    # ワードクラウド生成
+```
 
 ## ライセンス
 
